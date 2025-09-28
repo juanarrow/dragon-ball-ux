@@ -43,48 +43,39 @@ export class DragonBallApp {
 
   private setupEventListeners(): void {
     // Tabs de navegación - Desktop
-    const charactersTab = document.getElementById('characters-tab') as HTMLButtonElement;
-    const planetsTab = document.getElementById('planets-tab') as HTMLButtonElement;
-    const transformationsTab = document.getElementById('transformations-tab') as HTMLButtonElement;
-
-    if (charactersTab) {
-      fromEvent(charactersTab, 'click').subscribe(() => this.switchTab('characters'));
+    if (this.uiManager.charactersTab) {
+      fromEvent(this.uiManager.charactersTab, 'click').subscribe(() => this.switchTab('characters'));
     }
-    if (planetsTab) {
-      fromEvent(planetsTab, 'click').subscribe(() => this.switchTab('planets'));
+    if (this.uiManager.planetsTab) {
+      fromEvent(this.uiManager.planetsTab, 'click').subscribe(() => this.switchTab('planets'));
     }
-    if (transformationsTab) {
-      fromEvent(transformationsTab, 'click').subscribe(() => this.switchTab('transformations'));
+    if (this.uiManager.transformationsTab) {
+      fromEvent(this.uiManager.transformationsTab, 'click').subscribe(() => this.switchTab('transformations'));
     }
 
     // Tabs de navegación - Mobile
-    const charactersTabMobile = document.getElementById('characters-tab-mobile') as HTMLButtonElement;
-    const planetsTabMobile = document.getElementById('planets-tab-mobile') as HTMLButtonElement;
-    const transformationsTabMobile = document.getElementById('transformations-tab-mobile') as HTMLButtonElement;
-
-    if (charactersTabMobile) {
-      fromEvent(charactersTabMobile, 'click').subscribe(() => {
+    if (this.uiManager.charactersTabMobile) {
+      fromEvent(this.uiManager.charactersTabMobile, 'click').subscribe(() => {
         this.switchTab('characters');
         this.uiManager.closeMobileMenu();
       });
     }
-    if (planetsTabMobile) {
-      fromEvent(planetsTabMobile, 'click').subscribe(() => {
+    if (this.uiManager.planetsTabMobile) {
+      fromEvent(this.uiManager.planetsTabMobile, 'click').subscribe(() => {
         this.switchTab('planets');
         this.uiManager.closeMobileMenu();
       });
     }
-    if (transformationsTabMobile) {
-      fromEvent(transformationsTabMobile, 'click').subscribe(() => {
+    if (this.uiManager.transformationsTabMobile) {
+      fromEvent(this.uiManager.transformationsTabMobile, 'click').subscribe(() => {
         this.switchTab('transformations');
         this.uiManager.closeMobileMenu();
       });
     }
 
     // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement;
-    if (mobileMenuBtn) {
-      fromEvent(mobileMenuBtn, 'click').subscribe((e: Event) => {
+    if (this.uiManager.mobileMenuBtn) {
+      fromEvent(this.uiManager.mobileMenuBtn, 'click').subscribe((e: Event) => {
         e.preventDefault();
         e.stopPropagation();
         this.uiManager.toggleMobileMenu();
@@ -92,72 +83,65 @@ export class DragonBallApp {
     }
 
     // Paginación
-    const prevBtn = document.getElementById('prev-page') as HTMLButtonElement;
-    const nextBtn = document.getElementById('next-page') as HTMLButtonElement;
+    console.log('Pagination event listeners setup:', { 
+      prevBtn: !!this.uiManager.prevBtn, 
+      nextBtn: !!this.uiManager.nextBtn 
+    });
 
-    console.log('Pagination event listeners setup:', { prevBtn: !!prevBtn, nextBtn: !!nextBtn });
-
-    if (prevBtn) {
-      fromEvent(prevBtn, 'click').subscribe(() => {
+    if (this.uiManager.prevBtn) {
+      fromEvent(this.uiManager.prevBtn, 'click').subscribe(() => {
         console.log('Previous page clicked');
         this.changePage(-1);
       });
     }
-    if (nextBtn) {
-      fromEvent(nextBtn, 'click').subscribe(() => {
+    if (this.uiManager.nextBtn) {
+      fromEvent(this.uiManager.nextBtn, 'click').subscribe(() => {
         console.log('Next page clicked');
         this.changePage(1);
       });
     }
 
     // Error message
-    const closeErrorBtn = document.getElementById('close-error') as HTMLButtonElement;
-    if (closeErrorBtn) {
-      fromEvent(closeErrorBtn, 'click').subscribe(() => this.uiManager.hideError());
+    if (this.uiManager.closeErrorBtn) {
+      fromEvent(this.uiManager.closeErrorBtn, 'click').subscribe(() => this.uiManager.hideError());
     }
 
     // Back button
-    const backBtn = document.getElementById('back-btn') as HTMLButtonElement;
-    if (backBtn) {
-      fromEvent(backBtn, 'click').subscribe(() => this.goBack());
+    if (this.uiManager.backBtn) {
+      fromEvent(this.uiManager.backBtn, 'click').subscribe(() => this.goBack());
     }
 
     // Transformation modal
-    const closeTransformationModalBtn = document.getElementById('close-transformation-modal') as HTMLButtonElement;
-    const prevTransformationBtn = document.getElementById('prev-transformation') as HTMLButtonElement;
-    const nextTransformationBtn = document.getElementById('next-transformation') as HTMLButtonElement;
-    const playTransformationBtn = document.getElementById('play-transformation') as HTMLButtonElement;
-
     console.log('Setting up transformation modal event listeners:', {
-      closeBtn: !!closeTransformationModalBtn,
-      prevBtn: !!prevTransformationBtn,
-      nextBtn: !!nextTransformationBtn,
-      playBtn: !!playTransformationBtn
+      closeBtn: !!this.uiManager.closeTransformationModalBtn,
+      prevBtn: !!this.uiManager.prevTransformationBtn,
+      nextBtn: !!this.uiManager.nextTransformationBtn,
+      playBtn: !!this.uiManager.playTransformationBtn
     });
 
-    if (closeTransformationModalBtn) {
-      fromEvent(closeTransformationModalBtn, 'click').subscribe(() => {
+    if (this.uiManager.closeTransformationModalBtn) {
+      fromEvent(this.uiManager.closeTransformationModalBtn, 'click').subscribe(() => {
         console.log('Close button clicked');
         this.transformationsModule.closeTransformationModal();
       });
     }
     
-    if (prevTransformationBtn) {
-      fromEvent(prevTransformationBtn, 'click').subscribe(() => {
+    if (this.uiManager.prevTransformationBtn) {
+      fromEvent(this.uiManager.prevTransformationBtn, 'click').subscribe(() => {
         console.log('Previous button clicked');
         this.transformationsModule.previousTransformation();
       });
     }
     
-    if (nextTransformationBtn) {
-      fromEvent(nextTransformationBtn, 'click').subscribe(() => {
+    if (this.uiManager.nextTransformationBtn) {
+      fromEvent(this.uiManager.nextTransformationBtn, 'click').subscribe(() => {
         console.log('Next button clicked');
         this.transformationsModule.nextTransformation();
       });
     }
     
-    if (playTransformationBtn) {
-      fromEvent(playTransformationBtn, 'click').subscribe(() => {
+    if (this.uiManager.playTransformationBtn) {
+      fromEvent(this.uiManager.playTransformationBtn, 'click').subscribe(() => {
         console.log('Play button clicked');
         this.transformationsModule.playTransformationSequence();
       });
