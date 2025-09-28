@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragon Ball Universe - Explorador de Personajes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="module" crossorigin src="/dragon-ball-ux/assets/index-nMrvmznF.js"></script>
+  <link rel="stylesheet" crossorigin href="/dragon-ball-ux/assets/index-BY-hh8nb.css">
+</head>
+<body class="bg-gradient-to-br from-orange-900 via-red-900 to-yellow-900 min-h-screen">
+    <!-- Header -->
+    <header class="bg-black/20 backdrop-blur-md border-b border-orange-500/30 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-dragon text-white text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-bold text-white font-orbitron">
+                        Dragon Ball <span class="text-orange-400">Universe</span>
+                    </h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-6">
+                        <button id="characters-tab" class="nav-btn active">
+                            <i class="fas fa-users mr-2"></i>Personajes
+                        </button>
+                        <button id="planets-tab" class="nav-btn">
+                            <i class="fas fa-globe mr-2"></i>Planetas
+                        </button>
+                        <button id="transformations-tab" class="nav-btn">
+                            <i class="fas fa-bolt mr-2"></i>Transformaciones
+                        </button>
+                    </nav>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" class="md:hidden text-white hover:text-orange-400 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="mobile-menu-hidden bg-black/30 backdrop-blur-md border-t border-orange-500/30">
+            <div class="container mx-auto px-4 py-4">
+                <nav class="flex flex-col space-y-3">
+                    <button id="characters-tab-mobile" class="nav-btn-mobile active text-left">
+                        <i class="fas fa-users mr-3"></i>Personajes
+                    </button>
+                    <button id="planets-tab-mobile" class="nav-btn-mobile text-left">
+                        <i class="fas fa-globe mr-3"></i>Planetas
+                    </button>
+                    <button id="transformations-tab-mobile" class="nav-btn-mobile text-left">
+                        <i class="fas fa-bolt mr-3"></i>Transformaciones
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="container mx-auto px-4 py-8">
+        <div class="max-w-2xl mx-auto">
+            <div class="relative">
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Buscar personajes, planetas o transformaciones..."
+                    class="w-full px-6 py-4 bg-black/30 backdrop-blur-md border border-orange-500/30 rounded-2xl text-white placeholder-gray-300 focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300"
+                >
+                <button id="search-btn" class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-6 py-2 rounded-xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-300">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Spinner -->
+    <div id="loading" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50">
+        <div class="flex items-center justify-center h-full">
+            <div class="bg-black/80 rounded-2xl p-8 flex flex-col items-center">
+                <div class="animate-spin rounded-full h-16 w-16 border-4 border-orange-500 border-t-transparent mb-4"></div>
+                <p class="text-white font-medium">Cargando datos del universo Dragon Ball...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pb-12">
+        <!-- Home View -->
+        <div id="home-view">
+            <!-- Stats Section -->
+            <section id="stats-section" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <div class="stat-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-300">Total Personajes</h3>
+                            <p id="total-characters" class="text-3xl font-bold text-orange-400">-</p>
+                        </div>
+                        <i class="fas fa-users text-4xl text-orange-500/30"></i>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-300">Total Planetas</h3>
+                            <p id="total-planets" class="text-3xl font-bold text-blue-400">-</p>
+                        </div>
+                        <i class="fas fa-globe text-4xl text-blue-500/30"></i>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-300">Transformaciones</h3>
+                            <p id="total-transformations" class="text-3xl font-bold text-purple-400">-</p>
+                        </div>
+                        <i class="fas fa-bolt text-4xl text-purple-500/30"></i>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Content Grid -->
+            <section id="content-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 gap-y-16">
+                <!-- Content will be dynamically loaded here -->
+            </section>
+
+            <!-- Pagination -->
+            <section id="pagination" class="flex justify-center items-center space-x-4 mt-12">
+                <button id="prev-page" class="pagination-btn" disabled>
+                    <i class="fas fa-chevron-left mr-2"></i>Anterior
+                </button>
+                <span id="page-info" class="text-white font-medium">Página 1 de 1</span>
+                <button id="next-page" class="pagination-btn" disabled>
+                    Siguiente<i class="fas fa-chevron-right ml-2"></i>
+                </button>
+            </section>
+        </div>
+
+        <!-- Detail View -->
+        <div id="detail-view" class="hidden">
+            <!-- Back Button -->
+            <div class="mb-6">
+                <button id="back-btn" class="inline-flex items-center px-4 py-2 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Volver
+                </button>
+            </div>
+
+            <!-- Detail Content -->
+            <div id="detail-content" class="bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl overflow-hidden">
+                <!-- Detail content will be dynamically loaded here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Character Detail Modal -->
+    <div id="detail-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 p-4">
+        <div class="flex items-center justify-center h-full">
+            <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <h2 id="modal-title" class="text-3xl font-bold text-white font-orbitron"></h2>
+                        <button id="close-modal" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    <div id="modal-content">
+                        <!-- Modal content will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transformation Viewer Modal -->
+    <div id="transformation-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-50 p-4">
+        <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="transformation-title" class="text-3xl font-bold text-white font-orbitron">
+                        <i class="fas fa-bolt text-orange-400 mr-3"></i>
+                        Transformaciones
+                    </h2>
+                </div>
+                
+                <!-- Transformation Display -->
+                <div class="relative">
+                    <div id="transformation-display" class="aspect-square max-w-md mx-auto mb-6 relative image-overflow-container rounded-3xl bg-gradient-to-br from-orange-500/20 to-yellow-500/20 border border-orange-500/30">
+                        <img id="transformation-image" src="" alt="" class="w-full h-full object-scale-down image-overflow transition-all duration-1000 ease-in-out">
+                        
+                        <!-- Power Aura Effect -->
+                        <div id="power-aura" class="absolute inset-0 opacity-0 transition-opacity duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-r from-orange-500/30 via-yellow-500/30 to-orange-500/30 animate-pulse"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-transparent animate-ping"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Transformation Info -->
+                    <div class="text-center mb-6">
+                        <h3 id="current-transformation-name" class="text-2xl font-bold text-white mb-2 font-orbitron"></h3>
+                        <div class="flex justify-center items-center space-x-4 mb-4">
+                            <span id="current-transformation-power" class="px-4 py-2 bg-orange-500/20 text-orange-300 rounded-full font-bold"></span>
+                            <span id="transformation-counter" class="text-gray-400"></span>
+                        </div>
+                        
+                        <!-- Power Level Bar -->
+                        <div class="max-w-sm mx-auto">
+                            <div class="power-level-bar h-3 mb-2">
+                                <div id="transformation-power-fill" class="power-level-fill h-full transition-all duration-1000" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Controls -->
+                    <div class="flex justify-center items-center space-x-4 mb-6">
+                        <button id="prev-transformation" class="px-8 py-4 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]">
+                            <i class="fas fa-chevron-left mr-2"></i>Anterior
+                        </button>
+                        
+                        <button id="play-transformation" class="px-10 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 font-bold min-h-[48px]">
+                            <i class="fas fa-play mr-2"></i>Transformar
+                        </button>
+                        
+                        <button id="next-transformation" class="px-8 py-4 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]">
+                            Siguiente<i class="fas fa-chevron-right ml-2"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Close Button -->
+                    <div class="flex justify-center">
+                        <button id="close-transformation-modal" class="px-8 py-4 bg-red-600/80 backdrop-blur-md border border-red-500/30 text-white rounded-xl hover:bg-red-600 hover:border-red-500 transition-all duration-300 font-bold min-h-[48px]">
+                            <i class="fas fa-times mr-2"></i>Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Message -->
+    <div id="error-message" class="hidden fixed bottom-4 right-4 bg-red-600 text-white px-6 py-4 rounded-lg shadow-lg z-50">
+        <div class="flex items-center">
+            <i class="fas fa-exclamation-triangle mr-3"></i>
+            <span id="error-text">Ha ocurrido un error</span>
+            <button id="close-error" class="ml-4 text-white/80 hover:text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>
