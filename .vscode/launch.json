@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Calculator with Chrome",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5173",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "../src/*": "${webRoot}/*"
+            },
+            "skipFiles": [
+                "<node_internals>/**"
+            ]
+        }
+    ]
+}
