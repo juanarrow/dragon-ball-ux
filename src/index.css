@@ -371,3 +371,31 @@
 #home-view {
   overflow: visible !important;
 }
+
+/* Transformation modal button fixes */
+#transformation-modal button {
+  position: relative;
+  z-index: 10;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+  user-select: none;
+}
+
+#transformation-modal button:disabled {
+  pointer-events: none !important;
+  cursor: not-allowed !important;
+}
+
+#transformation-modal button i {
+  pointer-events: none;
+}
+
+#transformation-modal button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}

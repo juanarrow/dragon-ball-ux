@@ -187,9 +187,6 @@
                         <i class="fas fa-bolt text-orange-400 mr-3"></i>
                         Transformaciones
                     </h2>
-                    <button id="close-transformation-modal" class="text-gray-400 hover:text-white transition-colors">
-                        <i class="fas fa-times text-2xl"></i>
-                    </button>
                 </div>
                 
                 <!-- Transformation Display -->
@@ -221,17 +218,24 @@
                     </div>
                     
                     <!-- Controls -->
-                    <div class="flex justify-center items-center space-x-4">
-                        <button id="prev-transformation" class="px-6 py-3 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                    <div class="flex justify-center items-center space-x-4 mb-6">
+                        <button id="prev-transformation" class="px-8 py-4 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]">
                             <i class="fas fa-chevron-left mr-2"></i>Anterior
                         </button>
                         
-                        <button id="play-transformation" class="px-8 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 font-bold">
+                        <button id="play-transformation" class="px-10 py-4 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-xl hover:from-orange-600 hover:to-yellow-600 transition-all duration-300 font-bold min-h-[48px]">
                             <i class="fas fa-play mr-2"></i>Transformar
                         </button>
                         
-                        <button id="next-transformation" class="px-6 py-3 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button id="next-transformation" class="px-8 py-4 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px]">
                             Siguiente<i class="fas fa-chevron-right ml-2"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Close Button -->
+                    <div class="flex justify-center">
+                        <button id="close-transformation-modal" class="px-8 py-4 bg-red-600/80 backdrop-blur-md border border-red-500/30 text-white rounded-xl hover:bg-red-600 hover:border-red-500 transition-all duration-300 font-bold min-h-[48px]">
+                            <i class="fas fa-times mr-2"></i>Cerrar
                         </button>
                     </div>
                 </div>

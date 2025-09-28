@@ -177,6 +177,28 @@ class DragonBallApiService {
         })
       );
   }
+
+  // Obtener planeta por ID
+  getPlanetById(id: number): Observable<Planet | null> {
+    return from(this.fetchData<Planet>(`/planets/${id}`))
+      .pipe(
+        catchError((error) => {
+          console.error(`Error getting planet ${id}:`, error);
+          return of(null);
+        })
+      );
+  }
+
+  // Obtener transformación por ID
+  getTransformationById(id: number): Observable<Transformation | null> {
+    return from(this.fetchData<Transformation>(`/transformations/${id}`))
+      .pipe(
+        catchError((error) => {
+          console.error(`Error getting transformation ${id}:`, error);
+          return of(null);
+        })
+      );
+  }
 }
 
 export const dragonBallApi = new DragonBallApiService();
