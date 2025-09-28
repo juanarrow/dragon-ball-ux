@@ -143,21 +143,7 @@
   overflow: hidden;
 }
 
-.image-container::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent 30%, rgba(251, 146, 60, 0.1) 50%, transparent 70%);
-  transform: translateX(-100%);
-  transition: transform 0.6s ease;
-}
 
-.group:hover .image-container::after {
-  transform: translateX(100%);
-}
 
 /* Efectos de texto brillante */
 .text-glow {
@@ -213,36 +199,6 @@
   overflow: hidden;
 }
 
-.card-shine::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transform: rotate(45deg);
-  transition: all 0.5s ease;
-  opacity: 0;
-}
-
-.card-shine:hover::before {
-  animation: shine 0.7s ease-in-out;
-}
-
-@keyframes shine {
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
-    opacity: 0;
-  }
-}
 
 /* Transformation Animations */
 @keyframes powerUp {
@@ -323,4 +279,95 @@
 .transformation-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+}
+
+/* Image Overflow Effect */
+.image-overflow-container {
+  position: relative;
+  overflow: visible !important;
+  z-index: 1;
+}
+
+.image-overflow {
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  max-height: 130% !important;
+  object-position: center bottom;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.image-overflow:hover {
+  transform: translateY(-12px) scale(1.05);
+  z-index: 10;
+  filter: drop-shadow(0 8px 25px rgba(0, 0, 0, 0.4)) brightness(1.1);
+}
+
+/* Card adjustments for overflow */
+.card-with-overflow {
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out;
+  overflow: visible !important;
+}
+
+.card-with-overflow:hover {
+  z-index: 5;
+  transform: translateY(-2px);
+}
+
+/* Content spacing for overflow cards */
+.overflow-content {
+  padding-top: 15px;
+  position: relative;
+  z-index: 3;
+  background: inherit;
+  border-radius: 0 0 1rem 1rem;
+}
+
+/* Special effect for character cards */
+.character-card.card-with-overflow .image-overflow {
+  max-height: 160% !important;
+  transform: translateY(-10px);
+}
+
+.character-card.card-with-overflow:hover .image-overflow {
+  transform: translateY(-20px) scale(1.1);
+  filter: drop-shadow(0 15px 35px rgba(251, 146, 60, 0.5)) brightness(1.2);
+}
+
+/* Special effect for transformation cards */
+.transformation-card.card-with-overflow .image-overflow {
+  max-height: 150% !important;
+  transform: translateY(-8px);
+}
+
+.transformation-card.card-with-overflow:hover .image-overflow {
+  transform: translateY(-18px) scale(1.08);
+  filter: drop-shadow(0 12px 30px rgba(168, 85, 247, 0.5)) brightness(1.15);
+}
+
+/* Ensure all card types have visible overflow */
+.character-card,
+.transformation-card,
+.planet-card {
+  overflow: visible !important;
+}
+
+.character-card .image-container,
+.transformation-card .image-container,
+.planet-card .image-container {
+  overflow: visible !important;
+}
+
+/* Ensure grid container allows overflow */
+#content-grid {
+  overflow: visible !important;
+}
+
+/* Ensure main content areas allow overflow */
+.main-content,
+#home-view {
+  overflow: visible !important;
 }

@@ -566,16 +566,16 @@ export class DragonBallApp {
     console.log('renderCharacters: rendering', characters.length, 'characters');
 
     contentGrid.innerHTML = characters.map(character => `
-      <div class="character-card card-shine" onclick="app.navigateToDetail('character', ${character.id})">
-        <div class="image-container aspect-square">
+      <div class="character-card card-shine card-with-overflow" onclick="app.navigateToDetail('character', ${character.id})">
+        <div class="image-container aspect-square image-overflow-container bg-gradient-to-br from-orange-500/10 to-yellow-500/10 rounded-t-2xl">
           <img 
             src="${character.image}" 
             alt="${character.name}"
-            class="w-full h-full object-scale-down bg-gradient-to-br from-orange-500/10 to-yellow-500/10"
+            class="w-full h-full object-scale-down image-overflow"
             onerror="this.src='https://via.placeholder.com/300x300/1f2937/f59e0b?text=${encodeURIComponent(character.name)}'"
           >
         </div>
-        <div class="p-4">
+        <div class="p-4 overflow-content">
           <h3 class="text-xl font-bold text-white mb-2 font-orbitron">${character.name}</h3>
           <div class="flex flex-wrap gap-2 mb-3">
             <span class="race-badge">${character.race}</span>
@@ -653,16 +653,16 @@ export class DragonBallApp {
     }
 
     contentGrid.innerHTML = transformations.map(transformation => `
-      <div class="transformation-card card-shine" onclick="app.navigateToDetail('transformation', ${transformation.id})">
-        <div class="image-container aspect-square">
+      <div class="transformation-card card-shine card-with-overflow" onclick="app.navigateToDetail('transformation', ${transformation.id})">
+        <div class="image-container aspect-square image-overflow-container bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-t-2xl">
           <img 
             src="${transformation.image}" 
             alt="${transformation.name}"
-            class="w-full h-full object-scale-down bg-gradient-to-br from-purple-500/10 to-pink-500/10"
+            class="w-full h-full object-scale-down image-overflow"
             onerror="this.src='https://via.placeholder.com/300x300/1f2937/8b5cf6?text=${encodeURIComponent(transformation.name)}'"
           >
         </div>
-        <div class="p-4">
+        <div class="p-4 overflow-content">
           <h3 class="text-xl font-bold text-white mb-2 font-orbitron">${transformation.name}</h3>
           <div class="mb-3">
             <div class="flex justify-between text-sm text-gray-300 mb-1">
