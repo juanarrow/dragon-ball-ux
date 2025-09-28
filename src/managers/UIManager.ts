@@ -11,6 +11,9 @@ export class UIManager {
     mobileMenuBtn: null as HTMLButtonElement | null,
   };
 
+  private isToggling = false;
+  private mobileMenuOpen = false;
+
   constructor() {
     this.initializeElements();
   }
@@ -19,11 +22,15 @@ export class UIManager {
     this.elements.homeView = document.getElementById('home-view');
     this.elements.detailView = document.getElementById('detail-view');
     this.elements.contentGrid = document.getElementById('content-grid');
-    this.elements.loadingSpinner = document.getElementById('loading-spinner');
+    this.elements.loadingSpinner = document.getElementById('loading');
     this.elements.errorMessage = document.getElementById('error-message');
     this.elements.searchInput = document.getElementById('search-input') as HTMLInputElement;
     this.elements.mobileMenu = document.getElementById('mobile-menu');
     this.elements.mobileMenuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement;
+    
+    console.log('UIManager elements initialized:');
+    console.log('- Mobile menu:', !!this.elements.mobileMenu);
+    console.log('- Mobile menu button:', !!this.elements.mobileMenuBtn);
   }
 
   // Getters para elementos
@@ -108,23 +115,44 @@ export class UIManager {
 
   // Métodos para menú móvil
   toggleMobileMenu(): void {
+    if (this.isToggling) {
+      console.log('Toggle already in progress, ignoring');
+      return;
+    }
+
+    this.isToggling = true;
+    console.log('Toggle mobile menu called, current state:', this.mobileMenuOpen);
+    
+    const menu = this.elements.mobileMenu;
     const icon = this.elements.mobileMenuBtn?.querySelector('i');
     
-    if (this.elements.mobileMenu?.classList.contains('hidden')) {
-      this.elements.mobileMenu.classList.remove('hidden');
+    if (!this.mobileMenuOpen) {
+      console.log('Opening mobile menu');
+      this.mobileMenuOpen = true;
+      menu?.classList.remove('mobile-menu-hidden');
+      menu?.classList.add('mobile-menu-visible');
       icon?.classList.remove('fa-bars');
       icon?.classList.add('fa-times');
     } else {
-      this.elements.mobileMenu?.classList.add('hidden');
+      console.log('Closing mobile menu');
+      this.mobileMenuOpen = false;
+      menu?.classList.remove('mobile-menu-visible');
+      menu?.classList.add('mobile-menu-hidden');
       icon?.classList.remove('fa-times');
       icon?.classList.add('fa-bars');
     }
+
+    setTimeout(() => {
+      this.isToggling = false;
+    }, 100);
   }
 
   closeMobileMenu(): void {
     const icon = this.elements.mobileMenuBtn?.querySelector('i');
     
-    this.elements.mobileMenu?.classList.add('hidden');
+    this.mobileMenuOpen = false;
+    this.elements.mobileMenu?.classList.remove('mobile-menu-visible');
+    this.elements.mobileMenu?.classList.add('mobile-menu-hidden');
     icon?.classList.remove('fa-times');
     icon?.classList.add('fa-bars');
   }

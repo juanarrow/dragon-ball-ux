@@ -71,7 +71,11 @@ export class DragonBallApp {
 
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement;
-    mobileMenuBtn?.addEventListener('click', () => this.uiManager.toggleMobileMenu());
+    mobileMenuBtn?.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.uiManager.toggleMobileMenu();
+    });
 
     // Paginación
     const prevBtn = document.getElementById('prev-page') as HTMLButtonElement;

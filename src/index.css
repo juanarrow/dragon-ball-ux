@@ -97,6 +97,24 @@
   .gender-unknown {
     @apply bg-gray-500/20 text-gray-300 border border-gray-500/30;
   }
+
+  #transformation-modal:not(.hidden) {
+    @apply flex items-center justify-center;
+  }
+
+  .mobile-menu-hidden {
+    display: none;
+  }
+
+  .mobile-menu-visible {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    #mobile-menu {
+      display: none !important;
+    }
+  }
 }
 
 /* Animaciones personalizadas */
