@@ -1,0 +1,326 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fuentes personalizadas */
+.font-orbitron {
+  font-family: 'Orbitron', monospace;
+}
+
+/* Componentes personalizados */
+@layer components {
+  .nav-btn {
+    @apply px-4 py-2 text-white/70 hover:text-white transition-all duration-300 font-medium relative;
+  }
+  
+  .nav-btn.active {
+    @apply text-orange-400;
+  }
+  
+  .nav-btn.active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-500;
+  }
+  
+  .nav-btn-mobile {
+    @apply px-4 py-3 text-white/70 hover:text-white transition-all duration-300 font-medium rounded-lg hover:bg-orange-500/10;
+  }
+  
+  .nav-btn-mobile.active {
+    @apply text-orange-400 bg-orange-500/20;
+  }
+  
+  .stat-card {
+    @apply bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-orange-500/30 transition-all duration-300;
+  }
+  
+  .character-card {
+    @apply bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-orange-500/50 hover:scale-105 transition-all duration-300 cursor-pointer;
+  }
+  
+  .planet-card {
+    @apply bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-blue-500/50 hover:scale-105 transition-all duration-300 cursor-pointer;
+  }
+  
+  .transformation-card {
+    @apply bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden hover:border-purple-500/50 hover:scale-105 transition-all duration-300 cursor-pointer;
+  }
+  
+  .pagination-btn {
+    @apply px-6 py-3 bg-black/30 backdrop-blur-md border border-orange-500/30 text-white rounded-xl hover:bg-orange-500/20 hover:border-orange-500 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black/30 disabled:hover:border-orange-500/30;
+  }
+  
+  .power-level-bar {
+    @apply w-full bg-gray-700 rounded-full h-2 overflow-hidden;
+  }
+  
+  .power-level-fill {
+    @apply h-full bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-1000 ease-out;
+  }
+  
+  .affiliation-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .affiliation-z-fighter {
+    @apply bg-blue-500/20 text-blue-300 border border-blue-500/30;
+  }
+  
+  .affiliation-villain {
+    @apply bg-red-500/20 text-red-300 border border-red-500/30;
+  }
+  
+  .affiliation-neutral {
+    @apply bg-gray-500/20 text-gray-300 border border-gray-500/30;
+  }
+  
+  .affiliation-other {
+    @apply bg-purple-500/20 text-purple-300 border border-purple-500/30;
+  }
+  
+  .race-badge {
+    @apply inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium bg-orange-500/20 text-orange-300 border border-orange-500/30;
+  }
+  
+  .gender-badge {
+    @apply inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium;
+  }
+  
+  .gender-male {
+    @apply bg-blue-500/20 text-blue-300 border border-blue-500/30;
+  }
+  
+  .gender-female {
+    @apply bg-pink-500/20 text-pink-300 border border-pink-500/30;
+  }
+  
+  .gender-unknown {
+    @apply bg-gray-500/20 text-gray-300 border border-gray-500/30;
+  }
+}
+
+/* Animaciones personalizadas */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(251, 146, 60, 0.3); }
+  50% { box-shadow: 0 0 30px rgba(251, 146, 60, 0.6); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f97316, #eab308);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ea580c, #d97706);
+}
+
+/* Efectos de hover para imágenes */
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(251, 146, 60, 0.1) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.group:hover .image-container::after {
+  transform: translateX(100%);
+}
+
+/* Efectos de texto brillante */
+.text-glow {
+  text-shadow: 0 0 10px rgba(251, 146, 60, 0.5);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-btn {
+    @apply text-sm px-3 py-2;
+  }
+  
+  .stat-card {
+    @apply p-4;
+  }
+}
+
+/* Loading animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(251, 146, 60, 0.4);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 40px rgba(251, 146, 60, 0.8);
+  }
+}
+
+.loading-pulse {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+/* Modal animations */
+.modal-enter {
+  animation: modalEnter 0.3s ease-out;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Card hover effects */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.card-shine:hover::before {
+  animation: shine 0.7s ease-in-out;
+}
+
+@keyframes shine {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+/* Transformation Animations */
+@keyframes powerUp {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.3);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+}
+
+@keyframes energyBurst {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes transformationFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@keyframes auraGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(251, 146, 60, 0.4), inset 0 0 20px rgba(251, 146, 60, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(251, 146, 60, 0.8), inset 0 0 40px rgba(251, 146, 60, 0.3);
+  }
+}
+
+.transformation-enter {
+  animation: powerUp 0.8s ease-in-out;
+}
+
+.transformation-flash {
+  animation: transformationFlash 0.3s ease-in-out;
+}
+
+.energy-burst {
+  animation: energyBurst 0.6s ease-out;
+}
+
+.aura-active {
+  animation: auraGlow 2s ease-in-out infinite;
+}
+
+/* Transformation Button */
+.transformation-btn {
+  @apply inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-300 font-medium;
+}
+
+.transformation-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+}

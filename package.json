@@ -1,0 +1,33 @@
+{
+  "name": "api-examples",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run dev",
+    "deploy": "npm run build && gh-pages -d dist"
+  },
+  "keywords": [
+    "rxjs",
+    "typescript",
+    "web",
+    "examples"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "description": "Ejemplo de API con TypeScript",
+  "dependencies": {
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "gh-pages": "^6.3.0",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.0.0",
+    "vite": "^7.1.7"
+  }
+}
