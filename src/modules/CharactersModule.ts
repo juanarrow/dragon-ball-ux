@@ -59,6 +59,13 @@ export class CharactersModule {
             <span class="gender-badge gender-${character.gender.toLowerCase()} text-lg px-4 py-2">${character.gender}</span>
             <span class="affiliation-badge ${this.getAffiliationClass(character.affiliation)} text-lg px-4 py-2">${character.affiliation}</span>
           </div>
+          <div class="text-center mt-8">
+            <button onclick="app.showTransformations('${character.name}', ${character.id})" class="transformation-btn">
+              <i class="fas fa-bolt mr-2"></i>
+              Ver Transformaciones
+              <i class="fas fa-magic ml-2"></i>
+            </button>
+          </div>
         </div>
 
         <div class="grid lg:grid-cols-2 gap-8 mb-8">
@@ -72,6 +79,14 @@ export class CharactersModule {
           </div>
           
           <div class="space-y-6">
+            <div class="bg-black/30 backdrop-blur-md border border-orange-500/30 rounded-2xl p-6">
+              <h3 class="text-2xl font-semibold text-orange-400 mb-4 flex items-center">
+                <i class="fas fa-book mr-3"></i>
+                Historia
+              </h3>
+              <p class="text-gray-300 leading-relaxed text-lg">${character.description}</p>
+            </div>
+            
             <div class="bg-black/30 backdrop-blur-md border border-orange-500/30 rounded-2xl p-6">
               <h3 class="text-2xl font-semibold text-orange-400 mb-4 flex items-center">
                 <i class="fas fa-info-circle mr-3"></i>
@@ -120,23 +135,6 @@ export class CharactersModule {
               </div>
             </div>
           </div>
-        </div>
-        
-        <div class="bg-black/30 backdrop-blur-md border border-orange-500/30 rounded-2xl p-6">
-          <h3 class="text-2xl font-semibold text-orange-400 mb-4 flex items-center">
-            <i class="fas fa-book mr-3"></i>
-            Historia
-          </h3>
-          <p class="text-gray-300 leading-relaxed text-lg">${character.description}</p>
-        </div>
-        
-        <!-- Transformation Button -->
-        <div class="text-center mt-8">
-          <button onclick="app.showTransformations('${character.name}', ${character.id})" class="transformation-btn">
-            <i class="fas fa-bolt mr-2"></i>
-            Ver Transformaciones
-            <i class="fas fa-magic ml-2"></i>
-          </button>
         </div>
       </div>
     `;
