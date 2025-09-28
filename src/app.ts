@@ -243,18 +243,10 @@ export class DragonBallApp {
   private loadTabData(tab: string, page: number): void {
     console.log(`Loading tab data: ${tab}, page: ${page}`);
     const cacheKey = this.stateManager.getCacheKey(tab, page);
-    
+    const dataLoadedKey = tab as keyof typeof this.stateManager.dataLoaded;
     // Verificar cache primero
     if (this.stateManager.hasCachedData(cacheKey)) {
       console.log(`Using cached data for ${tab} page ${page}`);
-      this.renderCachedData(tab, cacheKey);
-      return;
-    }
-
-    // Verificar si ya hemos cargado esta data y está en cache
-    const dataLoadedKey = tab as keyof typeof this.stateManager.dataLoaded;
-    if (page === 1 && this.stateManager.isDataLoaded(dataLoadedKey) && this.stateManager.hasCachedData(cacheKey)) {
-      console.log(`Using previously loaded data for ${tab}`);
       this.renderCachedData(tab, cacheKey);
       return;
     }
