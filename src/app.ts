@@ -47,35 +47,49 @@ export class DragonBallApp {
     const planetsTab = document.getElementById('planets-tab') as HTMLButtonElement;
     const transformationsTab = document.getElementById('transformations-tab') as HTMLButtonElement;
 
-    charactersTab?.addEventListener('click', () => this.switchTab('characters'));
-    planetsTab?.addEventListener('click', () => this.switchTab('planets'));
-    transformationsTab?.addEventListener('click', () => this.switchTab('transformations'));
+    if (charactersTab) {
+      fromEvent(charactersTab, 'click').subscribe(() => this.switchTab('characters'));
+    }
+    if (planetsTab) {
+      fromEvent(planetsTab, 'click').subscribe(() => this.switchTab('planets'));
+    }
+    if (transformationsTab) {
+      fromEvent(transformationsTab, 'click').subscribe(() => this.switchTab('transformations'));
+    }
 
     // Tabs de navegación - Mobile
     const charactersTabMobile = document.getElementById('characters-tab-mobile') as HTMLButtonElement;
     const planetsTabMobile = document.getElementById('planets-tab-mobile') as HTMLButtonElement;
     const transformationsTabMobile = document.getElementById('transformations-tab-mobile') as HTMLButtonElement;
 
-    charactersTabMobile?.addEventListener('click', () => {
-      this.switchTab('characters');
-      this.uiManager.closeMobileMenu();
-    });
-    planetsTabMobile?.addEventListener('click', () => {
-      this.switchTab('planets');
-      this.uiManager.closeMobileMenu();
-    });
-    transformationsTabMobile?.addEventListener('click', () => {
-      this.switchTab('transformations');
-      this.uiManager.closeMobileMenu();
-    });
+    if (charactersTabMobile) {
+      fromEvent(charactersTabMobile, 'click').subscribe(() => {
+        this.switchTab('characters');
+        this.uiManager.closeMobileMenu();
+      });
+    }
+    if (planetsTabMobile) {
+      fromEvent(planetsTabMobile, 'click').subscribe(() => {
+        this.switchTab('planets');
+        this.uiManager.closeMobileMenu();
+      });
+    }
+    if (transformationsTabMobile) {
+      fromEvent(transformationsTabMobile, 'click').subscribe(() => {
+        this.switchTab('transformations');
+        this.uiManager.closeMobileMenu();
+      });
+    }
 
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobile-menu-btn') as HTMLButtonElement;
-    mobileMenuBtn?.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      this.uiManager.toggleMobileMenu();
-    });
+    if (mobileMenuBtn) {
+      fromEvent(mobileMenuBtn, 'click').subscribe((e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.uiManager.toggleMobileMenu();
+      });
+    }
 
     // Paginación
     const prevBtn = document.getElementById('prev-page') as HTMLButtonElement;
@@ -83,22 +97,30 @@ export class DragonBallApp {
 
     console.log('Pagination event listeners setup:', { prevBtn: !!prevBtn, nextBtn: !!nextBtn });
 
-    prevBtn?.addEventListener('click', () => {
-      console.log('Previous page clicked');
-      this.changePage(-1);
-    });
-    nextBtn?.addEventListener('click', () => {
-      console.log('Next page clicked');
-      this.changePage(1);
-    });
+    if (prevBtn) {
+      fromEvent(prevBtn, 'click').subscribe(() => {
+        console.log('Previous page clicked');
+        this.changePage(-1);
+      });
+    }
+    if (nextBtn) {
+      fromEvent(nextBtn, 'click').subscribe(() => {
+        console.log('Next page clicked');
+        this.changePage(1);
+      });
+    }
 
     // Error message
     const closeErrorBtn = document.getElementById('close-error') as HTMLButtonElement;
-    closeErrorBtn?.addEventListener('click', () => this.uiManager.hideError());
+    if (closeErrorBtn) {
+      fromEvent(closeErrorBtn, 'click').subscribe(() => this.uiManager.hideError());
+    }
 
     // Back button
     const backBtn = document.getElementById('back-btn') as HTMLButtonElement;
-    backBtn?.addEventListener('click', () => this.goBack());
+    if (backBtn) {
+      fromEvent(backBtn, 'click').subscribe(() => this.goBack());
+    }
 
     // Transformation modal
     const closeTransformationModalBtn = document.getElementById('close-transformation-modal') as HTMLButtonElement;
@@ -113,28 +135,36 @@ export class DragonBallApp {
       playBtn: !!playTransformationBtn
     });
 
-    closeTransformationModalBtn?.addEventListener('click', () => {
-      console.log('Close button clicked');
-      this.transformationsModule.closeTransformationModal();
-    });
+    if (closeTransformationModalBtn) {
+      fromEvent(closeTransformationModalBtn, 'click').subscribe(() => {
+        console.log('Close button clicked');
+        this.transformationsModule.closeTransformationModal();
+      });
+    }
     
-    prevTransformationBtn?.addEventListener('click', () => {
-      console.log('Previous button clicked');
-      this.transformationsModule.previousTransformation();
-    });
+    if (prevTransformationBtn) {
+      fromEvent(prevTransformationBtn, 'click').subscribe(() => {
+        console.log('Previous button clicked');
+        this.transformationsModule.previousTransformation();
+      });
+    }
     
-    nextTransformationBtn?.addEventListener('click', () => {
-      console.log('Next button clicked');
-      this.transformationsModule.nextTransformation();
-    });
+    if (nextTransformationBtn) {
+      fromEvent(nextTransformationBtn, 'click').subscribe(() => {
+        console.log('Next button clicked');
+        this.transformationsModule.nextTransformation();
+      });
+    }
     
-    playTransformationBtn?.addEventListener('click', () => {
-      console.log('Play button clicked');
-      this.transformationsModule.playTransformationSequence();
-    });
+    if (playTransformationBtn) {
+      fromEvent(playTransformationBtn, 'click').subscribe(() => {
+        console.log('Play button clicked');
+        this.transformationsModule.playTransformationSequence();
+      });
+    }
 
     // Event listener para errores desde módulos
-    window.addEventListener('showError', (event: any) => {
+    fromEvent(window, 'showError').subscribe((event: any) => {
       this.uiManager.showError(event.detail);
     });
   }

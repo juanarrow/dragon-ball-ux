@@ -1,7 +1,8 @@
+import { fromEvent } from 'rxjs';
 import { DragonBallApp } from './app';
 
 // Inicializar la aplicación cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
+fromEvent(document, 'DOMContentLoaded').subscribe(() => {
   console.log('🐉 Iniciando Dragon Ball Universe App...');
   
   // Crear la instancia de la aplicación
@@ -14,11 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Manejar errores globales
-window.addEventListener('error', (event) => {
+fromEvent(window, 'error').subscribe((event: any) => {
   console.error('Error global capturado:', event.error);
 });
 
-window.addEventListener('unhandledrejection', (event) => {
+fromEvent(window, 'unhandledrejection').subscribe((event: any) => {
   console.error('Promise rechazada no manejada:', event.reason);
   event.preventDefault();
 });
