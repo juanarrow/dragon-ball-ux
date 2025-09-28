@@ -99,8 +99,8 @@ export class PlanetsModule {
   }
 
   // Cargar datos de planetas
-  loadPlanets(page: number): Observable<any> {
-    return dragonBallApi.getPlanets(page);
+  loadPlanets(page: number, limit: number = 12): Observable<any> {
+    return dragonBallApi.getPlanets(page, limit);
   }
 
   // Obtener planeta por ID

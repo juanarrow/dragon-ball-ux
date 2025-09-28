@@ -143,8 +143,8 @@ export class CharactersModule {
   }
 
   // Cargar datos de personajes
-  loadCharacters(page: number): Observable<any> {
-    return dragonBallApi.getCharacters(page);
+  loadCharacters(page: number, limit: number = 12): Observable<any> {
+    return dragonBallApi.getCharacters(page, limit);
   }
 
   // Buscar personajes

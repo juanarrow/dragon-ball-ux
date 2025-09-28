@@ -230,11 +230,11 @@ export class DragonBallApp {
     const loadPageData = (tab: string, page: number): Observable<any> | null => {
       switch (tab) {
         case 'characters':
-          return this.charactersModule.loadCharacters(page);
+          return this.charactersModule.loadCharacters(page, this.ITEMS_PER_PAGE);
         case 'planets':
-          return this.planetsModule.loadPlanets(page);
+          return this.planetsModule.loadPlanets(page, this.ITEMS_PER_PAGE);
         case 'transformations':
-          return this.transformationsModule.loadTransformations(page);
+          return this.transformationsModule.loadTransformations(page, this.ITEMS_PER_PAGE);
         default:
           return null;
       }
@@ -385,7 +385,7 @@ export class DragonBallApp {
           this.uiManager.renderContent(this.planetsModule.renderPlanets(filteredPlanets));
         } else {
           // Si no tenemos datos, cargar primero
-          this.planetsModule.loadPlanets(1).subscribe({
+          this.planetsModule.loadPlanets(1, this.ITEMS_PER_PAGE).subscribe({
             next: (response) => {
               const allPlanets = response.items || [];
               const filteredPlanets = this.planetsModule.filterPlanetsByName(allPlanets, searchTerm);
@@ -428,7 +428,7 @@ export class DragonBallApp {
           this.uiManager.renderContent(this.transformationsModule.renderTransformations(filteredTransformations));
         } else {
           // Si no tenemos datos, cargar primero
-          this.transformationsModule.loadTransformations(1).subscribe({
+          this.transformationsModule.loadTransformations(1, this.ITEMS_PER_PAGE).subscribe({
             next: (response) => {
               const allTransformations = response.items || [];
               const filteredTransformations = this.transformationsModule.filterTransformationsByName(allTransformations, searchTerm);
@@ -470,7 +470,7 @@ export class DragonBallApp {
 
   private loadStatsOnly(): void {
     // Cargar solo para obtener totales, sin renderizar
-    this.planetsModule.loadPlanets(1).subscribe({
+    this.planetsModule.loadPlanets(1, this.ITEMS_PER_PAGE).subscribe({
       next: (response) => {
         const meta = response.meta || {};
         this.stateManager.updateState({
@@ -480,7 +480,7 @@ export class DragonBallApp {
       error: (error) => console.error('Error loading planets stats:', error)
     });
 
-    this.transformationsModule.loadTransformations(1).subscribe({
+    this.transformationsModule.loadTransformations(1, this.ITEMS_PER_PAGE).subscribe({
       next: (response) => {
         const meta = response.meta || {};
         this.stateManager.updateState({

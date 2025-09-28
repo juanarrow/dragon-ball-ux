@@ -97,8 +97,8 @@ export class TransformationsModule {
   }
 
   // Cargar datos de transformaciones
-  loadTransformations(page: number): Observable<any> {
-    return dragonBallApi.getTransformations(page);
+  loadTransformations(page: number, limit: number = 12): Observable<any> {
+    return dragonBallApi.getTransformations(page, limit);
   }
 
   // Obtener transformación por ID
