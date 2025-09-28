@@ -123,6 +123,7 @@ export class DragonBallApp {
       fromEvent(this.uiManager.closeTransformationModalBtn, 'click').subscribe(() => {
         console.log('Close button clicked');
         this.transformationsModule.closeTransformationModal();
+        this.goBack();
       });
     }
     
@@ -214,8 +215,7 @@ export class DragonBallApp {
   }
 
   private loadDataIfNeeded(): void {
-    const state = this.stateManager.currentState;
-    const { currentTab, currentPage, searchTerm } = state;
+    const { currentTab, currentPage, searchTerm } = this.stateManager.currentState;
     
     if (searchTerm.trim()) {
       this.performSearch(searchTerm, currentTab);
